@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
 
-//config development
+// config development
 // const sequelize = new Sequelize(
 //     process.env.DATABASE,
 //     process.env.USER,
@@ -13,7 +13,7 @@ dotenv.config();
 //     },
 // );
 
-//config build docker
+// config build docker
 const sequelize = new Sequelize('nodejs', 'root', 'admin', {
     dialect: 'mysql',
     host: 'mysql',

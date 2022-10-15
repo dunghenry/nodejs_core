@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const bodyParser = require('body-parser');
 const colors = require('colors');
+const cookieParser = require('cookie-parser');
 const os = require('os');
 process.env.UV_THREADPOOL_SIZE = os.cpus.length;
 const viewEngine = require('./configs/viewEngine');
@@ -16,18 +17,17 @@ const app = express();
 viewEngine(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 //log request
 app.use(morgan('dev'));
 // middleware security
 app.use(helmet());
-
 //config routes
 routes(app);
 //Connect MySQL use sequelize
 sequelize.sync();
-//connect MongoDB
+//Connect MongoDB use mongoose
 connectDB();
-//connect redis
 app.listen(port, () =>
     console.log(colors.green(`Server listening on http://localhost:${port}`)),
 );
